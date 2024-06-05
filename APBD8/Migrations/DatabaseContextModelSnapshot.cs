@@ -237,7 +237,7 @@ namespace APBD8.Migrations
                         });
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
                 {
                     b.Property<int>("AccountId")
                         .HasColumnType("int")
@@ -308,7 +308,7 @@ namespace APBD8.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
                 {
                     b.HasOne("APBD8.Models.Account", "Account")
                         .WithMany("ShopingCarts")

@@ -2,10 +2,12 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace APBD8.Migrations
 {
     /// <inheritdoc />
-    public partial class restofthedb : Migration
+    public partial class all : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,6 +43,19 @@ namespace APBD8.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    PK_role = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.PK_role);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products_Categories",
                 columns: table => new
                 {
@@ -61,6 +76,29 @@ namespace APBD8.Migrations
                         column: x => x.FK_acount,
                         principalTable: "Products",
                         principalColumn: "PK_product",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    PK_account = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FK_role = table.Column<int>(type: "int", nullable: false),
+                    first_name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    last_name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    email = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.PK_account);
+                    table.ForeignKey(
+                        name: "FK_Accounts_Roles_FK_role",
+                        column: x => x.FK_role,
+                        principalTable: "Roles",
+                        principalColumn: "PK_role",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -89,6 +127,66 @@ namespace APBD8.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "PK_category", "name" },
+                values: new object[,]
+                {
+                    { 1, "Electronics" },
+                    { 2, "Books" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "PK_product", "depth", "height", "name", "weight", "width" },
+                values: new object[,]
+                {
+                    { 1, 24.0m, 2.0m, "Laptop", 2.5m, 35.5m },
+                    { 2, 14.0m, 0.8m, "Smartphone", 0.2m, 7.0m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "PK_role", "name" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Accounts",
+                columns: new[] { "PK_account", "email", "first_name", "last_name", "phone", "FK_role" },
+                values: new object[,]
+                {
+                    { 1, "john.doe@example.com", "John", "Doe", "123456789", 1 },
+                    { 2, "jane.doe@example.com", "Jane", "Doe", "987654321", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products_Categories",
+                columns: new[] { "FK_Category", "FK_acount" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Shopping_Carts",
+                columns: new[] { "FK_acount", "FK_product", "amount" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 2, 2 },
+                    { 2, 2, 1 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accounts_FK_role",
+                table: "Accounts",
+                column: "FK_role");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_Categories_FK_Category",
                 table: "Products_Categories",
@@ -113,7 +211,13 @@ namespace APBD8.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

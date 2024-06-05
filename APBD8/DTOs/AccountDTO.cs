@@ -2,9 +2,12 @@
 
 namespace APBD8.DTOs;
 
-public record AccountDTO(string firstname, string lastname, string email, string phone, Role role, IEnumerable<ShopingCart> ShopingCarts)
+public class AccountDTO
 {
-    public AccountDTO(Account account) : this(account.FirstName, account.LastName, account.Email, account.Phone,
-        account.Role, account.ShopingCarts)
-    { }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string? Phone { get; set; }
+    public string Role { get; set; }
+    public List<CartDTO> Cart { get; set; }
 }
