@@ -11,6 +11,7 @@ namespace APBD8.Services;
 public interface IDbService
 {
     Task<AccountDTO> GetAccount(int id);
+    Task<ProductDTO> PostProduct(ProductDTO productDto);
 }
 
 public class DbService(DatabaseContext context) : IDbService
@@ -40,5 +41,40 @@ public class DbService(DatabaseContext context) : IDbService
             throw new NotFoundException($"Account id: {id} does not exist");
         }
         return result;
+    }
+
+    public async Task<ProductDTO> PostProduct(ProductDTO productDto)
+    {
+        var product = new Product
+        {
+            Name = productDto.ProductName,
+            Weight = productDto.ProductWeight,
+            Width = productDto.ProductWidth,
+            Height = productDto.ProductHeight,
+            Depth = productDto.ProductDepth
+        };
+
+        var categories = await context.Categories
+            .Where(c => productDto.ProductCategories.Contains(c.Id))
+            .ToListAsync();
+
+        var notFound = productDto.ProductCategories.Except(categories.Select(c => c.Id)).ToList();
+
+        if (notFound.Any()) throw new NotFoundException($"There is no category with id: {notFound}");
+
+        foreach (var id in categories)
+        {
+            var productCategory = new ProductCategory
+            {
+                Product = product,
+                Category = id
+            };
+            await context.ProductsCategories.AddAsync(productCategory);
+        }
+
+        await context.Products.AddAsync(product);
+        await context.SaveChangesAsync();
+
+        return productDto;
     }
 }
