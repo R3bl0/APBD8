@@ -3,6 +3,7 @@ using APBD8.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APBD8.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240604164856_rest of the db")]
+    partial class restofthedb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,26 +65,6 @@ namespace APBD8.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Accounts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "john.doe@example.com",
-                            FirstName = "John",
-                            LastName = "Doe",
-                            Phone = "123456789",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "jane.doe@example.com",
-                            FirstName = "Jane",
-                            LastName = "Doe",
-                            Phone = "987654321",
-                            RoleId = 2
-                        });
                 });
 
             modelBuilder.Entity("APBD8.Models.Category", b =>
@@ -102,18 +85,6 @@ namespace APBD8.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Electronics"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Books"
-                        });
                 });
 
             modelBuilder.Entity("APBD8.Models.Product", b =>
@@ -154,26 +125,6 @@ namespace APBD8.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Depth = 24.0m,
-                            Height = 2.0m,
-                            Name = "Laptop",
-                            Weight = 2.5m,
-                            Width = 35.5m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Depth = 14.0m,
-                            Height = 0.8m,
-                            Name = "Smartphone",
-                            Weight = 0.2m,
-                            Width = 7.0m
-                        });
                 });
 
             modelBuilder.Entity("APBD8.Models.ProductCategory", b =>
@@ -191,18 +142,6 @@ namespace APBD8.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products_Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 1
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 1
-                        });
                 });
 
             modelBuilder.Entity("APBD8.Models.Role", b =>
@@ -223,21 +162,9 @@ namespace APBD8.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "User"
-                        });
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
                 {
                     b.Property<int>("AccountId")
                         .HasColumnType("int")
@@ -256,26 +183,6 @@ namespace APBD8.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Shopping_Carts");
-
-                    b.HasData(
-                        new
-                        {
-                            AccountId = 1,
-                            ProductId = 1,
-                            Amount = 1
-                        },
-                        new
-                        {
-                            AccountId = 1,
-                            ProductId = 2,
-                            Amount = 2
-                        },
-                        new
-                        {
-                            AccountId = 2,
-                            ProductId = 2,
-                            Amount = 1
-                        });
                 });
 
             modelBuilder.Entity("APBD8.Models.Account", b =>
@@ -308,7 +215,7 @@ namespace APBD8.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
                 {
                     b.HasOne("APBD8.Models.Account", "Account")
                         .WithMany("ShopingCarts")

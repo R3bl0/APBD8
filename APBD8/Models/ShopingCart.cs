@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace APBD8.Models;
 
+[PrimaryKey("AccountId", "ProductId")]
+[Table("Shopping_Carts")]
 public class ShopingCart
 {
     [ForeignKey("Account")]
