@@ -180,7 +180,7 @@ namespace APBD8.Migrations
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int")
-                        .HasColumnName("FK_acount");
+                        .HasColumnName("FK_account");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
@@ -241,7 +241,7 @@ namespace APBD8.Migrations
                 {
                     b.Property<int>("AccountId")
                         .HasColumnType("int")
-                        .HasColumnName("FK_acount");
+                        .HasColumnName("FK_account");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int")

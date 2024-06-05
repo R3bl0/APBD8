@@ -15,12 +15,6 @@ public class AccountsController:ControllerBase
     {
         _dbService = dbService;
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetAccounts()
-    {
-        return Ok(await _dbService.GetAllAccounts());
-    }
     
     [HttpGet("{accountId:int}")]
     public async Task<IActionResult> GetAccount(int accountId)

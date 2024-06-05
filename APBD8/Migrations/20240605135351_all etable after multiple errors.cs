@@ -7,7 +7,7 @@
 namespace APBD8.Migrations
 {
     /// <inheritdoc />
-    public partial class all : Migration
+    public partial class alletableaftermultipleerrors : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,12 +59,12 @@ namespace APBD8.Migrations
                 name: "Products_Categories",
                 columns: table => new
                 {
-                    FK_acount = table.Column<int>(type: "int", nullable: false),
+                    FK_account = table.Column<int>(type: "int", nullable: false),
                     FK_Category = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products_Categories", x => new { x.FK_acount, x.FK_Category });
+                    table.PrimaryKey("PK_Products_Categories", x => new { x.FK_account, x.FK_Category });
                     table.ForeignKey(
                         name: "FK_Products_Categories_Categories_FK_Category",
                         column: x => x.FK_Category,
@@ -72,8 +72,8 @@ namespace APBD8.Migrations
                         principalColumn: "PK_category",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Products_Categories_Products_FK_acount",
-                        column: x => x.FK_acount,
+                        name: "FK_Products_Categories_Products_FK_account",
+                        column: x => x.FK_account,
                         principalTable: "Products",
                         principalColumn: "PK_product",
                         onDelete: ReferentialAction.Cascade);
@@ -106,16 +106,16 @@ namespace APBD8.Migrations
                 name: "Shopping_Carts",
                 columns: table => new
                 {
-                    FK_acount = table.Column<int>(type: "int", nullable: false),
+                    FK_account = table.Column<int>(type: "int", nullable: false),
                     FK_product = table.Column<int>(type: "int", nullable: false),
                     amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shopping_Carts", x => new { x.FK_acount, x.FK_product });
+                    table.PrimaryKey("PK_Shopping_Carts", x => new { x.FK_account, x.FK_product });
                     table.ForeignKey(
-                        name: "FK_Shopping_Carts_Accounts_FK_acount",
-                        column: x => x.FK_acount,
+                        name: "FK_Shopping_Carts_Accounts_FK_account",
+                        column: x => x.FK_account,
                         principalTable: "Accounts",
                         principalColumn: "PK_account",
                         onDelete: ReferentialAction.Cascade);
@@ -165,7 +165,7 @@ namespace APBD8.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products_Categories",
-                columns: new[] { "FK_Category", "FK_acount" },
+                columns: new[] { "FK_Category", "FK_account" },
                 values: new object[,]
                 {
                     { 1, 1 },
@@ -174,7 +174,7 @@ namespace APBD8.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shopping_Carts",
-                columns: new[] { "FK_acount", "FK_product", "amount" },
+                columns: new[] { "FK_account", "FK_product", "amount" },
                 values: new object[,]
                 {
                     { 1, 1, 1 },

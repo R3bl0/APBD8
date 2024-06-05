@@ -9,7 +9,7 @@ namespace APBD8.Models;
 public class ShopingCart
 {
     [ForeignKey("Account")]
-    [Column("FK_acount")]
+    [Column("FK_account")]
     public int AccountId { get; set; }
     public Account Account { get; set; }
     [ForeignKey("Product")]

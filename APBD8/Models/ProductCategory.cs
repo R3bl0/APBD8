@@ -9,7 +9,7 @@ namespace APBD8.Models;
 public class ProductCategory
 {
     [ForeignKey("Product")]
-    [Column("FK_acount")]
+    [Column("FK_account")]
     public int ProductId { get; set; }
     public Product Product { get; set; }
     [ForeignKey("Category")]

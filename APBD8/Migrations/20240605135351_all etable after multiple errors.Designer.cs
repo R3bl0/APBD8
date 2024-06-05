@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APBD8.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240605130140_all")]
-    partial class all
+    [Migration("20240605135351_all etable after multiple errors")]
+    partial class alletableaftermultipleerrors
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,7 +183,7 @@ namespace APBD8.Migrations
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int")
-                        .HasColumnName("FK_acount");
+                        .HasColumnName("FK_account");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int")
@@ -244,7 +244,7 @@ namespace APBD8.Migrations
                 {
                     b.Property<int>("AccountId")
                         .HasColumnType("int")
-                        .HasColumnName("FK_acount");
+                        .HasColumnName("FK_account");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int")
