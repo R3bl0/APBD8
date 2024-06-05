@@ -6,7 +6,7 @@ namespace APBD8.Models;
 
 [PrimaryKey("AccountId", "ProductId")]
 [Table("Shopping_Carts")]
-public class ShopingCart
+public class ShoppingCart
 {
     [ForeignKey("Account")]
     [Column("FK_account")]

@@ -26,5 +26,5 @@ public class Product
     [Precision(5,2)]
     public decimal Depth { get; set; }
     public IEnumerable<ProductCategory> ProductsCategories { get; set; }
-    public IEnumerable<ShopingCart> ShopingCarts { get; set; }
+    public IEnumerable<ShoppingCart> ShopingCarts { get; set; }
 }

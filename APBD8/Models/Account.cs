@@ -13,6 +13,7 @@ public class Account
     [Column("FK_role")]
     public int RoleId { get; set; }
     public Role Role { get; set; }
+    
     [Column("first_name")]
     [MaxLength(50)]
     public string FirstName { get; set; }
@@ -25,5 +26,5 @@ public class Account
     [Column("phone")]
     [MaxLength(9)]
     public string? Phone { get; set; }
-    public IEnumerable<ShopingCart> ShopingCarts { get; set; }
+    public IEnumerable<ShoppingCart> ShopingCarts { get; set; }
 }

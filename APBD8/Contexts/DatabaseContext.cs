@@ -11,7 +11,7 @@ public class DatabaseContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<ProductCategory> ProductsCategories { get; set; }
-    public DbSet<ShopingCart> ShopingCarts { get; set; }
+    public DbSet<ShoppingCart> ShopingCarts { get; set; }
     
     protected DatabaseContext()
     {
@@ -83,10 +83,10 @@ public class DatabaseContext : DbContext
             new ProductCategory { ProductId = 2, CategoryId = 1 }
         );
 
-        modelBuilder.Entity<ShopingCart>().HasData(
-            new ShopingCart { AccountId = 1, ProductId = 1, Amount = 1 },
-            new ShopingCart { AccountId = 1, ProductId = 2, Amount = 2 },
-            new ShopingCart { AccountId = 2, ProductId = 2, Amount = 1 }
+        modelBuilder.Entity<ShoppingCart>().HasData(
+            new ShoppingCart { AccountId = 1, ProductId = 1, Amount = 1 },
+            new ShoppingCart { AccountId = 1, ProductId = 2, Amount = 2 },
+            new ShoppingCart { AccountId = 2, ProductId = 2, Amount = 1 }
         );
     }
 }

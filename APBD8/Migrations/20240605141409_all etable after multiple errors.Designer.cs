@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APBD8.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240605135351_all etable after multiple errors")]
+    [Migration("20240605141409_all etable after multiple errors")]
     partial class alletableaftermultipleerrors
     {
         /// <inheritdoc />
@@ -240,7 +240,7 @@ namespace APBD8.Migrations
                         });
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
                 {
                     b.Property<int>("AccountId")
                         .HasColumnType("int")
@@ -311,7 +311,7 @@ namespace APBD8.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("APBD8.Models.ShopingCart", b =>
+            modelBuilder.Entity("APBD8.Models.ShoppingCart", b =>
                 {
                     b.HasOne("APBD8.Models.Account", "Account")
                         .WithMany("ShopingCarts")
